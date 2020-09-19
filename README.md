@@ -1,2 +1,2 @@
 # nQueensProblem
- Solving the N-Queens problem recursively by backtracking
+ Gets the first solution to the N Queens Problem recursively.
