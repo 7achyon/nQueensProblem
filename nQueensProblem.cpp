@@ -77,27 +77,33 @@ bool isSafe(int y, int x) {
 }
 
 //the recursive loop that attempts to solve the problem, using backtracking to brute force the solution
-bool nQueensRecursion(int y, int n) {
-    if (y >= N) return true;
+bool nQueensRecursion(int y) {
+    //escape case
+    if (y == N) return true;
 
     for (int j = 0; j < N; j++) {
         checks++;
-        int temp = board[y][j];
+        
+        //output grid with current square being checked along with counter values for tracing the program's path
         board[y][j] = checking;
         draw();
         cout << "Checks: " << checks << "\n";
         cout << "Tries: " << tries << "\n";
         cout << "\n";
-        board[y][j] = temp;
+        board[y][j] = available;
+
         if(isSafe(y, j)) {
+            //if the square is safe, place a queen
             tries++;
             board[y][j]  = occupied;
 
-            if (nQueensRecursion(y+1, n-1)) {
+            //move to next row
+            if (nQueensRecursion(y+1)) {
                 return true;
-            } else {
-                board[y][j] = available;
-            } 
+            }
+            
+            //remove queen if row below has no valid squares
+            board[y][j] = available;
         }
     }
     
@@ -107,7 +113,7 @@ bool nQueensRecursion(int y, int n) {
 //entry point
 int main() {
     init();
-    nQueensRecursion(0, N);
+    nQueensRecursion(0);
     draw();
     cout << "\nSolved " << N << " Queen Problem in " << tries << " tries with " << checks << " checks.\n";
     return 0;
