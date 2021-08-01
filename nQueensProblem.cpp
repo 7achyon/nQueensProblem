@@ -1,4 +1,4 @@
-//N Queens Problem by venomz75 (MMXX)
+//N Queens Problem by 7achyon (MMXX)
 
 #include <iostream>
 #include <vector>
